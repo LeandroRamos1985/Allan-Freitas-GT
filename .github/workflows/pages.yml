@@ -1,0 +1,35 @@
+name: Publish Allan Freitas
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare complete website
+        run: |
+          mkdir -p _public
+          unzip -q Allan-Freitas-GitHub-Pronto.zip -d _public
+          rm -rf _public/_entrega
+          rm -f _public/LEIA-ME-GITHUB.md
+          test -f _public/index.html
+          test -f _public/assets/coastal-sunset.mp4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _public
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
