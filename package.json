@@ -1,0 +1,19 @@
+{
+  "name": "allan-freitas-site-qa",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Optional QA tools; site is dependency-free static output",
+  "scripts": {
+    "test": "node --test tests/lead.test.cjs",
+    "preview": "node tests/server.cjs",
+    "audit": "node tests/audit.cjs",
+    "tracking": "node tests/tracking.cjs",
+    "lighthouse": "node tests/lighthouse.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "@axe-core/playwright": "4.13.0",
+    "lighthouse": "13.4.1",
+    "sharp": "0.35.4"
+  }
+}
